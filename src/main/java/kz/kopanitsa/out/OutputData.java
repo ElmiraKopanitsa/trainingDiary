@@ -167,8 +167,7 @@ public class OutputData {
      * @param user пользователь
      */
     public void menu(User user) {
-        boolean isValidInput = false;
-        while (!isValidInput) {
+        while (true) {
             System.out.println("Выберите действие:");
             System.out.println("1. Добавить тренировку");
             System.out.println("2. Изменить тренировку");
@@ -185,31 +184,26 @@ public class OutputData {
                     System.out.println("Вы выбрали добавление тренировки.");
                     Training training = enterTraining();
                     trainingService.addTraining(user, training);
-                    isValidInput = true;
                 }
                 case "2" -> {
                     System.out.println("Вы выбрали изменение тренировки.");
                     Training training = enterTraining();
                     trainingService.updateTraining(user, training);
-                    isValidInput = true;
                 }
                 case "3" -> {
                     System.out.println("Вы выбрали удаление тренировки.");
                     Training training = enterTraining();
                     trainingService.removeTraining(user, training);
-                    isValidInput = true;
                 }
                 case "4" -> {
                     System.out.println("Вы выбрали посмотреть все тренировки.");
                     System.out.println(trainingService.getUserTrainings(user));
-                    isValidInput = true;
                 }
                 case "5" -> {
                     System.out.println("Вы выбрали посмотреть все тренировки одного типа.");
                     System.out.println("Введите тип тренировки: ");
                     String type = input.inputFromUserString();
                     System.out.println(trainingService.getUserTrainingsByType(user, type));
-                    isValidInput = true;
                 }
                 case "6" -> {
                     System.out.println("Вы выбрали посмотреть все тренировки все тренировки за определенный период.");
@@ -218,14 +212,12 @@ public class OutputData {
                     System.out.println("Введите окончание периода (формат даты 'dd-MM-yyyy'): ");
                     String endDate = input.inputFromUserString();
                     System.out.println(trainingService.getUserTrainingsInDateRange(user, startDate, endDate));
-                    isValidInput = true;
                 }
                 case "7" -> {
                     System.out.println("Вы выбрали посмотреть дополнительную информацию по тренировкам определенного типа.");
                     System.out.println("Введите тип тренировки: ");
                     String type = input.inputFromUserString();
                     System.out.println(trainingService.getAdditionalInfoStatistics(user, type));
-                    isValidInput = true;
                 }
                 case "8" -> {
                     System.out.println("Вы выбрали функции администратора.");
@@ -256,7 +248,7 @@ public class OutputData {
                     input.getScanner().close();
                     return;
                 }
-                default -> System.out.println("Пожалуйста, выберите 1 или 2.");
+                default -> System.out.println("Пожалуйста, выберите корректный пункт меню.");
             }
         }
     }
